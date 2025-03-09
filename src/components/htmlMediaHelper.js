@@ -48,6 +48,11 @@ export function enableHlsJsPlayer(runTimeTicks, mediaType) {
         return false;
     }
 
+    // Native HLS support in WebOS only plays stereo sound. HLS.js works better, but works only on WebOS 4 or newer.
+    if (browser.web0sVersion >= 4) {
+        return true;
+    }
+
     // The native players on these devices support seeking live streams, no need to use hls.js here
     if (browser.tizen || browser.web0s) {
         return false;
